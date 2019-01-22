@@ -1,0 +1,53 @@
+
+jiangphs-mbp-2:fdb-record-layer jiangph$ gradle run
+
+> Task :examples:run
+ERROR StatusLogger File not found in file system or classpath: /Users/jiangph/fdb/jiangph/fdb-record-layer/examples/resources/log4j2.properties
+2019-01-22 17:38:53,014 [INFO] c.a.f.r.s.Main - Clearing the Record Store ...
+2019-01-22 17:38:53,255 [INFO] c.a.f.r.s.Main - Writing Vendor and Item record ...
+2019-01-22 17:38:53,283 [INFO] c.a.f.r.p.f.FDBRecordStore - new record store format_version="6" key_space_path="/application:record-layer-sample/environment:demo" metaDataVersion="2"
+2019-01-22 17:38:53,373 [INFO] c.a.f.r.s.Main - Reading Vendor record with primary key 9375L ...
+2019-01-22 17:38:53,378 [INFO] c.a.f.r.s.Main -     Result -> Id: 9375, Name: Acme
+2019-01-22 17:38:53,378 [INFO] c.a.f.r.s.Main - Looking for item IDs with vendor ID 9375L ...
+2019-01-22 17:38:53,421 [INFO] c.a.f.r.s.Main -     Result -> Vendor ID: 9375, Item ID: 4836
+2019-01-22 17:38:53,421 [INFO] c.a.f.r.s.Main - Grouping items by vendor ...
+2019-01-22 17:38:53,438 [INFO] c.a.f.r.s.Main -     Result -> Vendor Name: Acme, Item names: [GPS]
+2019-01-22 17:38:53,438 [INFO] c.a.f.r.s.Main -     Result -> Vendor Name: Buy n Large, Item names: [Piles of Garbage, Personal Transport]
+2019-01-22 17:38:53,445 [INFO] c.a.f.r.p.f.FDBRecordStore - meta-data version changed key_space_path="/application:record-layer-sample/environment:demo" new_version="8" old_version="2"
+2019-01-22 17:38:53,446 [INFO] c.a.f.r.p.f.FDBRecordStore - version check scan found non-empty store key_space_path="/application:record-layer-sample/environment:demo"
+2019-01-22 17:38:53,447 [INFO] c.a.f.r.p.f.FDBRecordStore - indexes need rebuilding indexesWriteOnly="[item_quantity_sum, preference_tag, preference_tag_count, globalCount, order, email_address]" key_space_path="/application:record-layer-sample/environment:demo" recordCount="unknown"
+2019-01-22 17:38:53,463 [INFO] c.a.f.r.s.Main - Running index builds of new indexes:
+2019-01-22 17:38:53,560 [INFO] c.a.f.r.s.Main -   Index build of item_quantity_sum is complete.
+2019-01-22 17:38:53,560 [INFO] c.a.f.r.s.Main -   Index build of preference_tag_count is complete.
+2019-01-22 17:38:53,560 [INFO] c.a.f.r.s.Main -   Index build of globalCount is complete.
+2019-01-22 17:38:53,560 [INFO] c.a.f.r.s.Main -   Index build of email_address is complete.
+2019-01-22 17:38:53,576 [INFO] c.a.f.r.s.Main -   Index build of preference_tag is complete.
+2019-01-22 17:38:53,576 [INFO] c.a.f.r.s.Main -   Index build of order is complete.
+2019-01-22 17:38:53,576 [INFO] c.a.f.r.s.Main - Adding records with new secondary indexes ...
+2019-01-22 17:38:53,613 [INFO] c.a.f.r.s.Main - Store contains 7 records.
+2019-01-22 17:38:53,613 [INFO] c.a.f.r.s.Main - Retrieving all customers with first name "Jane"...
+2019-01-22 17:38:53,617 [INFO] c.a.f.r.s.Main - plan: Scan(<,>) | [Customer] | first_name EQUALS Jane
+2019-01-22 17:38:53,620 [INFO] c.a.f.r.s.Main -     Result -> Jane Doe
+2019-01-22 17:38:53,620 [INFO] c.a.f.r.s.Main - Retrieving all customers with last name "Doe"...
+2019-01-22 17:38:53,622 [INFO] c.a.f.r.s.Main - plan: Scan([[Doe],[Doe]]) | [Customer]
+2019-01-22 17:38:53,623 [INFO] c.a.f.r.s.Main -     Result -> Jane Doe
+2019-01-22 17:38:53,623 [INFO] c.a.f.r.s.Main - Retrieving all customers with name "Jane Doe"...
+2019-01-22 17:38:53,628 [INFO] c.a.f.r.s.Main - plan: Scan([[Doe, Jane],[Doe, Jane]]) | [Customer]
+2019-01-22 17:38:53,629 [INFO] c.a.f.r.s.Main -     Result -> Jane Doe
+2019-01-22 17:38:53,629 [INFO] c.a.f.r.s.Main - Retrieving all customers with an email address beginning with "john"...
+2019-01-22 17:38:53,633 [INFO] c.a.f.r.s.Main - Retrieving all customers with preference tags "books" and "movies"...
+2019-01-22 17:38:53,635 [INFO] c.a.f.r.s.Main - plan: Scan(<,>) | [Customer] | And([one of preference_tag EQUALS books, one of preference_tag EQUALS movies])
+2019-01-22 17:38:53,638 [INFO] c.a.f.r.s.Main -     Result -> John Smith
+2019-01-22 17:38:53,640 [INFO] c.a.f.r.s.Main - Number of customers with the "books" preference tag: 2
+2019-01-22 17:38:53,640 [INFO] c.a.f.r.s.Main - Retrieving all customers with an order of quantity greater than 2 ...
+2019-01-22 17:38:53,653 [INFO] c.a.f.r.s.Main - plan: Index(order ([2],>) | UnorderedPrimaryKeyDistinct()
+2019-01-22 17:38:53,654 [INFO] c.a.f.r.s.Main -     Result -> Jane Doe
+2019-01-22 17:38:53,656 [INFO] c.a.f.r.s.Main - Total quantity ordered of item 2740L: 4
+2019-01-22 17:38:53,660 [INFO] c.a.f.r.s.Main - Total quantity ordered of all items: 6
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 6.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/5.1.1/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 3s
+14 actionable tasks: 2 executed, 12 up-to-date
